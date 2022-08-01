@@ -1,7 +1,6 @@
 import uuidv4 from "../Helpers/uuid";
 import DOMNode from "../Helpers/elements";
 
-
 export default function Title(mountPoint, transition, data) {
     this.node = new DOMNode(mountPoint, transition);
 

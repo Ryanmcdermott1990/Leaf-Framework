@@ -9,10 +9,10 @@ export default function About(mountPoint, transition) {
         title: new Component(Title, false, {
             text: 'This is the About page!'
         }),
-        button: new Component(Button, false, {
+        button: new Component(Button, 200, {
             callBack: changeState, text: 'Increase counter'
         }),
-        button2: new Component(Button, false, {
+        button2: new Component(Button, 400, {
             callBack: alertCount, text: 'Alert Count'
         })
     });

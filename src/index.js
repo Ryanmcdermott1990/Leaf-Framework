@@ -1,8 +1,8 @@
-import About from "./components/About";
-import App from "./components/App";
 import "./styles.css";
 import {routes} from "./Helpers/routes";
 import Component from "./Component";
+import App from "./components/App";
+import Nav from "./components/Nav";
 
 export function navigate(payload) {
   window.history.pushState(payload.state, "", payload.path);
@@ -16,24 +16,28 @@ function getPage() {
   });
   if (found && Array.isArray(found)){
       const componentsArray = found.map(comp => {
-        return new Component(comp?.component);
+        return {create: new Component(comp?.component), mountPoint: comp.mountPoint};
       })
       render(componentsArray);
     }
 }
 
 async function render(components) {
-  const target = document.querySelector(`[data-UUID="content"]`);
-  target.innerHTML = null;
   components.forEach(component => {
-    if (component.component){
-      new component.component('content', 200);
+    let mount = 'content';
+    if (component.mountPoint){
+      mount = component.mountPoint;
+    }
+    const target = document.querySelector(`[data-UUID=${mount}]`);
+    target.innerHTML = null;
+    if (component.create.component){
+      new component.create.component(mount, 200);
     }
   })
 }
 
 function init() {
-  document.getElementById('app').innerHTML = `
+  document.getElementById('mount').innerHTML = `
     <div id="header">
         <h1>Nested Functional Component Rendering!</h1>
         <div>
@@ -43,8 +47,11 @@ function init() {
         </div>
         <h3>Render:</h3>
     </div>
+        <div data-UUID="static" ></div>
     <div data-UUID="content" id="app"></div>
     `;
+
+  render([{mountPoint: 'static', create: new Component(Nav, false)}])
 
   function route() {
     function listen() {
@@ -61,6 +68,7 @@ function init() {
       getPage();
     });
   }
+
 
   route();
 }
