@@ -5,6 +5,8 @@
 body {
   font-family: sans-serif;
   color: #404040;
+  margin: 0;
+  display: grid;
 }
 
 .active {
@@ -16,6 +18,44 @@ body {
   opacity: 0;
 }
 
-#header {
-  color: #b8b8b8;
+.nav-links-wrapper {
+  align-items: center;
+  display: flex;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+#app {
+  margin: 20px;
+  grid-row: 2;
+}
+
+#mount {
+  display: grid;
+  grid-template-rows: 6vh 1fr;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  height: 6vh;
+  width: 100%;
+  display: flex;
+  background: white;
+  box-shadow: -7px 2px 16px #0000002b;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+
+.logo-wrapper {
+  display: flex;
+}
+
+.logo {
+  margin: auto;
 }

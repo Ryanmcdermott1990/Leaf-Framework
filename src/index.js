@@ -38,20 +38,11 @@ async function render(components) {
 
 function init() {
   document.getElementById('mount').innerHTML = `
-    <div id="header">
-        <h1>Nested Functional Component Rendering!</h1>
-        <div>
-          An experiment to render functions as components in a nested fashion.
-          Components are rendered asynchronously to allow for the returned html to rely on computed data!
-          <strong>(No JSX needed)</strong>
-        </div>
-        <h3>Render:</h3>
-    </div>
-        <div data-UUID="static" ></div>
-    <div data-UUID="content" id="app"></div>
+        <nav data-UUID="nav" ></nav>
+        <section data-UUID="content" id="app"></section>
     `;
 
-  render([{mountPoint: 'static', create: new Component(Nav, false)}])
+  render([{mountPoint: 'nav', create: new Component(Nav, false)}])
 
   function route() {
     function listen() {
