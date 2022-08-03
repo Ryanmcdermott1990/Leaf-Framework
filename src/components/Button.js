@@ -9,7 +9,7 @@ export default function Button(mountPoint, transition, data) {
       const id = uuidv4();
       this.node.setHTML(`
                 <button data-UUID=${id}>${data.text}</button>`).then(() => {
-        this.node.element.querySelector(`[data-UUID="${id}"]`).addEventListener('click', data.callBack);
+        this.node.getElement(id).addEventListener('click', data.callBack);
       }).then(() => {
         myResolve();
       })

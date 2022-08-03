@@ -13,7 +13,7 @@ export default function Link(mountPoint, transition, data) {
             const {text} = this.node.children;
             this.node.setHTML(`
                 <div data-UUID=${text.target} class="link"></div>`).then(() => {
-                this.node.element.querySelector(`[data-UUID="${text.target}"]`).addEventListener('click', text.data.callBack);
+                this.node.getElement(text).addEventListener('click', text.data.callBack);
             }).then(() => {
                 this.node.renderChildren();
                 myResolve();

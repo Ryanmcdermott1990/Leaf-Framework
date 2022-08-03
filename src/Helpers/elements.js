@@ -14,17 +14,27 @@ export default function DOMNode(mountPoint, transition, components = null) {
             myResolve();
         }
     })
-    this.renderChildren = () => {}
+    this.renderChildren = () => {
+    }
     if (components && Object.entries(components)) {
         this.children = components;
         this.renderChildren = () => {
             Object.values(this.children).forEach(child => {
-                const element = this.element.querySelector(`[data-UUID="${child.target}"]`);
-                if (element){
+                const element = this.getElement(child);
+                if (element) {
                     child.component(child.target, child.transition, child.data)
                 }
             })
         }
+    }
+    this.getElement = (target) => {
+        let mountPoint = null;
+        if (typeof target === 'object') {
+            mountPoint = target.target;
+        } else if (typeof target === 'string') {
+            mountPoint = target;
+        }
+        return this.element.querySelector(`[data-UUID="${mountPoint}"]`);
     }
     return this;
 }

@@ -31,17 +31,15 @@ export default function Posts(mountPoint, transition) {
             {name: 'test post 1', body: 'this is a test post'},
             {name: 'test post 2', body: 'this is another test post'}
         ]
-        console.log(state.posts)
     }
 
     const renderTemplate = () => {
         const {button} = this.node.children;
         return new Promise(async (myResolve) => {
             this.node.setHTML(`
-                    <div state="posts" template="posts"></div>
                     <span data-UUID=${button.target}></span>
+                    <div state="posts" template="posts"></div>
                 `).then(() => {
-                refreshContent('posts', this.expressions, this.node.element)
                 this.node.renderChildren();
                 myResolve();
             })

@@ -11,7 +11,7 @@ export default function Nav(mountPoint, transition) {
             Link, false, {
                 children: {
                     text: new Component(Title, false, {
-                        text: 'test',
+                        text: 'Leaf',
                         callBack: () => navigate({state: null, path: '/'})
                     })
                 }
