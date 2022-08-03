@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 
-body {
+body, a {
   font-family: sans-serif;
   color: #404040;
   margin: 0;
@@ -58,4 +58,12 @@ nav {
 
 .logo {
   margin: auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+.link {
+  cursor: pointer;
 }

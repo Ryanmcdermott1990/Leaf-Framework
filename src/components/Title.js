@@ -9,6 +9,7 @@ export default function Title(mountPoint, transition, data) {
             const id = uuidv4();
             this.node.setHTML(`
                 <${data.element ?? 'h2'} data-UUID=${id} class=${data.class ?? ''}>${data.text}</${data.element ?? 'h2'}>`).then(() => {
+            }).then(() => {
                 myResolve();
             })
         });
