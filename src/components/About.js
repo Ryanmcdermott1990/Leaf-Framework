@@ -2,7 +2,7 @@ import Component from "../Component";
 import DOMNode from "../Helpers/elements";
 import Title from "./Title";
 import Button from "./Button";
-import {addEffect, createState, refreshContent} from "../Helpers/state";
+import {addEffect, createState} from "../Helpers/state";
 
 export default function About(mountPoint, transition) {
     this.node = new DOMNode(mountPoint, transition, {
@@ -14,30 +14,21 @@ export default function About(mountPoint, transition) {
         })
     });
 
-    this.expressions = {
-        stateCount: () => `Count: <strong>${state?.count}`
+    this.node.expressions = {
+        stateCount: () => `Count: <strong>${state?.count}</strong>`
     }
 
-    let state = createState({
-            count: 0
-        },
-        this.expressions,
-        this.node.element
-    )
-
-    state = addEffect(state, alertCount)
-    state = addEffect(state, consoleCount)
+    let state =  this.node.createState({
+          count: 0
+        }
+    );
 
     function changeState() {
         state.count = state.count + 1
     }
 
     function consoleCount() {
-        console.log(state);
-    }
-
-    function alertCount(){
-        alert(state.count);
+        console.log(state.count);
     }
 
     const renderTemplate = () => {
@@ -45,10 +36,9 @@ export default function About(mountPoint, transition) {
         return new Promise(async (myResolve) => {
             this.node.setHTML(`
                     <span data-UUID=${title.target}></span>
-                    <p state="count" template="stateCount"></strong></p>
+                    <p state="count" template="stateCount">${this.node.expressions.stateCount()}</strong></p>
                     <span data-UUID=${button.target}></span>
                 `).then(() => {
-                refreshContent('count', this.expressions, this.node.element)
                 this.node.renderChildren();
                 myResolve();
             })

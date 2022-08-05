@@ -66,4 +66,9 @@ a {
 
 .link {
   cursor: pointer;
+  display: flex;
+}
+
+.link>h1, .link>h2, .link>h3, .link>h4, .link>p{
+  margin: auto;
 }
