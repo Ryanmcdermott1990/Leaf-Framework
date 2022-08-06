@@ -9,17 +9,31 @@ export function navigate(payload) {
   getPage();
 }
 
+//I have added this so it can be exported, and used in other components, (not sure if this is better to do in routes.js)?
+function goTo(path) {
+        navigate({state: null, path: path} )
+    }
+
 function getPage() {
   const path = window.location.pathname;
   const found = routes.filter((route) => {
     return (route.path === path || !route.exact && path.includes(route.path))
   });
-  if (found && Array.isArray(found)){
+
+  //The found array is 0 when the route is not found
+  if (found && Array.isArray(found) && found.length > 0){
       const componentsArray = found.map(comp => {
         return {create: new Component(comp?.component), mountPoint: comp.mountPoint};
       })
       render(componentsArray);
     }
+
+  //Navigate to another page, (in this case home)
+  else 
+  {
+    goTo('/')
+  }
+  
 }
 
 async function render(components) {
